@@ -7,7 +7,7 @@ BOT_TOKEN = os.environ['BOT_TOKEN']
 HEROKU_APP_URL = os.environ['HEROKU_APP_URL']
 
 server = Flask(__name__)
-bot = telebot.TeleBot(BOT_TOKEN)
+bot = telebot.AsyncTeleBot(BOT_TOKEN)
 
 help_cmd_message = ''' Сәлем, {0},
  Маған кириллицамен қазақша жазсаң, мен саған оны латын графикасына аударып берем\n
@@ -50,13 +50,13 @@ def transliterate(text):
 
 @bot.message_handler(commands=["start", "help", "?"])
 def help_cmd_handler(message):
-    bot.send_message(message.chat.id, help_cmd_message.format(message.from_user.first_name))
-    print(message.from_user.first_name, message.from_user.username, message.text)
-
+    print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
+    bot.send_message(message.chat.id, help_cmd_message.format(message.from_user.first_name)).wait()
+    
 @bot.message_handler(content_types=["text"])
 def send_transliterated(message):
-    bot.reply_to(message, transliterate(message.text))    
-    print(message.from_user.first_name, message.from_user.username, message.text)
+    print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
+    bot.send_message(message.chat.id, transliterate(message.text)).wait()       
     
 @server.route('/' + BOT_TOKEN, methods=['POST'])
 def get_message():

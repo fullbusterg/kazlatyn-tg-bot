@@ -10,9 +10,9 @@ server = Flask(__name__)
 bot = telebot.AsyncTeleBot(BOT_TOKEN)
 
 help_cmd_message = ''' Сәлем, {0},
- Маған кириллицамен қазақша жазсаң, мен саған оны латын графикасына аударып берем\n
+ Маған кириллицамен қазақша жазсаң, мен саған оны латын графикасына аударып берем.\n
 Привет, {0},
- Просто напиши мне на казахском на кириллице, и Я переведу твой текст на латинскую графику.\n\n
+ Просто напиши мне на казахском на кириллице, и Я переведу твой текст на латинскую графику.\n
 Contacts: Telegram: @armandyne, e-mail: armanndyne@gmail.com
                    '''               
 
@@ -55,7 +55,8 @@ def help_cmd_handler(message):
     
 @bot.message_handler(content_types=["text"])
 def send_transliterated(message):
-    print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
+    #print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
+    print(message)
     bot.reply_to(message, transliterate(message.text)).wait()       
     
 @server.route('/' + BOT_TOKEN, methods=['POST'])

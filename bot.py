@@ -48,7 +48,7 @@ def transliterate(text):
     
     return tmpstr
 
-@bot.message_handler(commands=["start", "help", "?"])
+@bot.message_handler(commands=["start", "help"])
 def help_cmd_handler(message):
     print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
     bot.send_message(message.chat.id, help_cmd_message.format(message.from_user.first_name)).wait()
@@ -56,7 +56,7 @@ def help_cmd_handler(message):
 @bot.message_handler(content_types=["text"])
 def send_transliterated(message):
     print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
-    bot.send_message(message.chat.id, transliterate(message.text)).wait()       
+    bot.reply_to(message, transliterate(message.text)).wait()       
     
 @server.route('/' + BOT_TOKEN, methods=['POST'])
 def get_message():

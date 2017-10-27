@@ -2,6 +2,7 @@
 import telebot
 import os
 from flask import Flask, request
+import math
 
 BOT_TOKEN = os.environ['BOT_TOKEN']
 HEROKU_APP_URL = os.environ['HEROKU_APP_URL']
@@ -40,10 +41,10 @@ def transliterate(text):
         }
     
     tmpstr = text
-    for (k,v) in adapt_cyr_letters_mapping.items():
+    for (k, v) in adapt_cyr_letters_mapping.items():
         tmpstr = tmpstr.replace(k, v)
 
-    for (k,v) in letters_mapping.items():
+    for (k, v) in letters_mapping.items():
         tmpstr = tmpstr.replace(k, v)
     
     return tmpstr
@@ -55,10 +56,26 @@ def help_cmd_handler(message):
     
 @bot.message_handler(content_types=["text"])
 def send_transliterated(message):
-    #print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
+    # print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
     print(message)
     print("length = ", len(message.text))
-    bot.reply_to(message, transliterate(message.text)).wait()       
+    
+    text_max_length = 5000
+    text_length = len(message.text)    
+    endchunk = 0
+    if text_length > text_max_length:
+        parts = math.ceil(text_length)
+        for i in range(parts):
+            startchunk = endchunk
+            if i != parts - 1:
+                endchunk = (i + 1) * text_max_length
+                
+            if i == parts - 1:
+                bot.reply_to(message, transliterate(message.text[endchunk:])).wait()     
+            else:
+                bot.reply_to(message, transliterate(message.text[startchunk:endchunk])).wait() 
+    else:
+        bot.reply_to(message, transliterate(message.text)).wait()    
     
 @server.route('/' + BOT_TOKEN, methods=['POST'])
 def get_message():

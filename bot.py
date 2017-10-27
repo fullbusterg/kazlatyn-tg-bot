@@ -57,6 +57,7 @@ def help_cmd_handler(message):
 def send_transliterated(message):
     #print(message.from_user.first_name, message.from_user.username, message.chat.id, message.chat.type, message.text)
     print(message)
+    print("length = ", len(message.text))
     bot.reply_to(message, transliterate(message.text)).wait()       
     
 @server.route('/' + BOT_TOKEN, methods=['POST'])

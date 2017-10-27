@@ -10,10 +10,10 @@ server = Flask(__name__)
 bot = telebot.TeleBot(BOT_TOKEN)
 
 help_cmd_message = ''' Сәлем, {0},
-                   Маған кириллицамен қазақша жазсаң, мен саған оны латын графикасына аударып берем\n
-                   Привет, {0},
-                   Просто напиши мне на казахском на кириллице, и Я переведу твой текст на латинскую графику.\n\n
-                   Contacts: Telegram: @armandyne, e-mail: armanndyne@gmail.com
+ Маған кириллицамен қазақша жазсаң, мен саған оны латын графикасына аударып берем\n
+Привет, {0},
+ Просто напиши мне на казахском на кириллице, и Я переведу твой текст на латинскую графику.\n\n
+Contacts: Telegram: @armandyne, e-mail: armanndyne@gmail.com
                    '''               
 
 def transliterate(text):

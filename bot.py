@@ -4,7 +4,7 @@ import os
 from flask import Flask, request
 
 BOT_TOKEN = 'bot643141092:AAHRPH1TauZxyqtSupEUf0BGyTPuB5O91A8'
-HEROKU_APP_URL = os.environ['HEROKU_APP_URL']
+HEROKU_APP_URL = os.environ['https://git.heroku.com/latynkaz.git']
 
 server = Flask(__name__)
 bot = telebot.AsyncTeleBot(BOT_TOKEN)

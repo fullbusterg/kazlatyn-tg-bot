@@ -3,7 +3,7 @@ import telebot
 import os
 from flask import Flask, request
 
-BOT_TOKEN = os.environ['BOT_TOKEN']
+BOT_TOKEN = 'AAHRPH1TauZxyqtSupEUf0BGyTPuB5O91A8'
 HEROKU_APP_URL = os.environ['HEROKU_APP_URL']
 
 server = Flask(__name__)

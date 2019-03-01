@@ -13,7 +13,7 @@ help_cmd_message = ''' Сәлем, {0},
  Маған кириллицамен қазақша жазсаң, мен саған оны латын графикасына аударып берем.\n
 Привет, {0},
  Просто напиши мне на казахском на кириллице, и Я переведу твой текст на латинскую графику.\n
-Contacts: Telegram: @armandyne, e-mail: armanndyne@gmail.com
+Contacts: Telephon number: 87073441069, e-mail: rsshyngys@gmail.com
                    '''               
 
 def transliterate(text):
